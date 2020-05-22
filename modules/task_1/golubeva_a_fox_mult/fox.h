@@ -3,6 +3,7 @@
 #define MODULES_TASK_1_GOLUBEVA_A_FOX_MULT_FOX_H_
 
 #include <vector>
+#include <omp.h>
 
 using Matrix = std::vector<std::vector<double>>;
 
