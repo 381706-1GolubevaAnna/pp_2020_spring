@@ -12,16 +12,6 @@ TEST(Fox_Mult, can_create_random_matrix) {
   ASSERT_NO_THROW(randMatrix(10));
 }
 
-TEST(Fox_Mult, time) {
-  Matrix A = randMatrix(15);
-  Matrix B = randMatrix(15);
-  double t = omp_get_wtime();
-  Matrix res = foxMult(A, B, 4);
-  t = omp_get_wtime();
-  std::cout << "fox seq   " << omp_get_wtime() - t << std::endl;
-
-}
-
 TEST(Fox_Mult, res_simple_mult_is_correct) {
   Matrix A = { {1.1, 1.2, 1.3},
                {2.4, 2.5, 2.6},
