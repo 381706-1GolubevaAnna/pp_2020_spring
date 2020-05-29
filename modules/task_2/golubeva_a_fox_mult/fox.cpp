@@ -39,6 +39,31 @@ bool canBeMultiplied(const Matrix &A, const Matrix &B) {
     return true;
 }
 
+Matrix foxMultSeq(const Matrix& A, const Matrix& B, const int &blockSize) {
+    if (A[0].size() != B.size())
+        throw "Different size";
+    int n = A.size();
+    if (blockSize > n)
+      throw "block size is larger than matrix size";
+    Matrix C(n, std::vector<double>(n, 0));
+    int endA, endB;
+    for (int a = 0; a < n; a+=blockSize) {
+      endA = std::min(a + blockSize, n);
+        for (int b = 0; b < n; b+=blockSize) {
+          endB = std::min(b + blockSize, n);
+            for (int i = 0; i < n; i++) {
+              for (int j = a; j < endA; j++) {
+                for (int k = b; k < endB; k++) {
+                  C[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+        }
+    }
+
+  return C;
+}
+
 Matrix foxMult(const Matrix& A, const Matrix& B, const int & numThreads) {
     if (!isSquare(A) || !isSquare(B))
       throw("Matrix isn't square");

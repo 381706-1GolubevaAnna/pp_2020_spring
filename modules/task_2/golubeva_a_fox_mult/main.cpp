@@ -13,6 +13,19 @@ TEST(Fox_Mult, can_create_random_matrix) {
   ASSERT_NO_THROW(randMatrix(10));
 }
 
+TEST(Fox_Mult, time) {
+  Matrix A = randMatrix(500);
+  Matrix B = randMatrix(500);
+  double t = omp_get_wtime();
+  Matrix res = foxMultSeq(A, B, 357);
+  std::cout << "fox seq   " << omp_get_wtime() - t << std::endl;
+  
+  t = omp_get_wtime();
+  Matrix res2 = foxMult(A, B, 2);
+  std::cout << "fox omp   " << omp_get_wtime() - t << std::endl;
+
+}
+
 TEST(Fox_Mult, cant_do_simple_mult_with_different_size) {
   Matrix A = randMatrix(9);
   Matrix B = randMatrix(10);
